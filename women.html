@@ -1,0 +1,246 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Women's Health - Ayurveda Wellness</title>
+    <style>
+        :root {
+            --primary-color: #b77b50;;
+            --secondary-color: #e0cbb8;
+            --text-color: #333;
+            --light-bg: #fafaf4;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Arial', sans-serif;
+        }
+
+        body {
+            color: var(--text-color);
+            line-height: 1.6;
+        }
+
+        .header {
+            background: var(--primary-color);
+            color: white;
+            padding: 1rem;
+            text-align: center;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .feature-card {
+            background: white;
+            border-radius: 10px;
+            padding: 1.5rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .feature-card h3 {
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+
+        .tracker-form {
+            background: var(--light-bg);
+            padding: 2rem;
+            border-radius: 10px;
+            margin-top: 2rem;
+        }
+
+        .form-group {
+            margin-bottom: 1rem;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: bold;
+        }
+
+        input, select, textarea {
+            width: 100%;
+            padding: 0.5rem;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            margin-bottom: 1rem;
+        }
+
+        button {
+            background: var(--primary-color);
+            color: white;
+            padding: 0.8rem 1.5rem;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+
+        button:hover {
+            background: #723688;
+        }
+
+        .yoga-section {
+            margin-top: 2rem;
+        }
+
+        .video-container {
+            position: relative;
+            padding-bottom: 56.25%;
+            height: 0;
+            overflow: hidden;
+            margin-top: 1rem;
+        }
+
+        .video-container img {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        #healthLog {
+            margin-top: 2rem;
+            padding: 1rem;
+            background: var(--light-bg);
+            border-radius: 10px;
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <h1>Women's Wellness Through Ayurveda</h1>
+        <p>Discover ancient wisdom for modern well-being</p>
+    </header>
+
+    <div class="container">
+        <div class="features-grid">
+            <div class="feature-card">
+                <h3>Health Tracker</h3>
+                <div class="tracker-form">
+                    <form id="healthForm">
+                        <div class="form-group">
+                            <label for="date">Date</label>
+                            <input type="date" id="date" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="dosha">Your Dosha Type</label>
+                            <select id="dosha" required>
+                                <option value="">Select your dosha</option>
+                                <option value="vata">Vata</option>
+                                <option value="pitta">Pitta</option>
+                                <option value="kapha">Kapha</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="symptoms">Current Symptoms</label>
+                            <textarea id="symptoms" rows="3"></textarea>
+                        </div>
+                        <button type="submit">Track Today</button>
+                    </form>
+                </div>
+                <div id="healthLog"></div>
+            </div>
+
+            <div class="feature-card">
+                <h3>Daily Yoga Sessions</h3>
+                <div class="yoga-section">
+                    <select id="yogaType">
+                        <option value="">Choose your practice</option>
+                        <option value="morning">Morning Energizing Flow</option>
+                        <option value="evening">Evening Relaxation</option>
+                        <option value="reproductive">Reproductive Health</option>
+                    </select>
+                    <div class="video-container">
+                        <img src="/api/placeholder/800/450" alt="Yoga Session Placeholder">
+                    </div>
+                </div>
+            </div>
+
+            <div class="feature-card">
+                <h3>Ayurvedic Solutions</h3>
+                <select id="healthIssue" onchange="showRemedies()">
+                    <option value="">Select health concern</option>
+                    <option value="menstrual">Menstrual Health</option>
+                    <option value="fertility">Fertility Support</option>
+                    <option value="menopause">Menopause Management</option>
+                    <option value="stress">Stress & Anxiety</option>
+                </select>
+                <div id="remedyContent"></div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Health Tracker Functionality
+        document.getElementById('healthForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const date = document.getElementById('date').value;
+            const dosha = document.getElementById('dosha').value;
+            const symptoms = document.getElementById('symptoms').value;
+            
+            const log = document.getElementById('healthLog');
+            const entry = document.createElement('div');
+            entry.innerHTML = `
+                <h4>${new Date(date).toLocaleDateString()}</h4>
+                <p><strong>Dosha:</strong> ${dosha}</p>
+                <p><strong>Symptoms:</strong> ${symptoms}</p>
+                <hr>
+            `;
+            log.insertBefore(entry, log.firstChild);
+            this.reset();
+        });
+
+        // Yoga Session Selection
+        document.getElementById('yogaType').addEventListener('change', function() {
+            const message = document.createElement('p');
+            message.textContent = `Selected: ${this.value} yoga session`;
+            this.parentElement.appendChild(message);
+        });
+
+        // Ayurvedic Remedies
+        function showRemedies() {
+            const issue = document.getElementById('healthIssue').value;
+            const content = document.getElementById('remedyContent');
+            
+            const remedies = {
+                menstrual: "Try warm ginger tea, practice gentle yoga, and use a heating pad. Avoid cold foods.",
+                fertility: "Include ghee in diet, practice meditation, and consume shatavari herb.",
+                menopause: "Practice cooling pranayama, consume cooling foods, and maintain regular sleep schedule.",
+                stress: "Practice deep breathing, use brahmi herb, and maintain regular oil massage (abhyanga)."
+            };
+
+            content.innerHTML = `
+                <div style="margin-top: 1rem;">
+                    <h4>Ayurvedic Recommendations:</h4>
+                    <p>${remedies[issue] || 'Please select a health concern'}</p>
+                </div>
+            `;
+        }
+    </script>
+</body>
+</html>
+
