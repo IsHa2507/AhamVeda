@@ -6,12 +6,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ayurveda Wellness</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/css/bootstrap.min.css" rel="stylesheet">
     <style>
+    
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
+        
+
         html {
             scroll-behavior: smooth;
         }
@@ -226,7 +230,84 @@
             box-shadow: 0 5px 15px rgba(0,0,0,0.1);
             text-align: center;
         }
+        .footer-ayurveda {
+            background: linear-gradient(to bottom, var(--soft-cream), #fff);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .footer-ayurveda::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, 
+                var(--primary-green),
+                var(--light-green),
+                var(--earth-brown),
+                var(--light-green),
+                var(--primary-green)
+            );
+        }
+        .footer-heading {
+            color: var(--primary-green);
+            font-size: 1.5rem;
+            margin-bottom: 1.2rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid var(--light-green);
+        }
+
+        .footer-link {
+            color: var(--earth-brown);
+            text-decoration: none;
+            transition: all 0.3s ease;
+            display: inline-block;
+            margin-bottom: 0.5rem;
+        }
+
+        .footer-link:hover {
+            color: var(--primary-green);
+            transform: translateX(5px);
+        }
         
+        .newsletter-input {
+            background: rgba(255, 255, 255, 0.9);
+            border: 1px solid var(--light-green);
+            padding: 10px 15px;
+            border-radius: 5px;
+        }
+
+        .newsletter-button {
+            background: var(--primary-green);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+        }
+
+        .newsletter-button:hover {
+            background: var(--earth-brown);
+            transform: translateY(-2px);
+        }
+
+        .footer-bottom {
+            background: rgba(85, 113, 83, 0.1);
+            padding: 1rem 0;
+            margin-top: 2rem;
+        }
+
+        .herb-divider {
+            height: 30px;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 20'%3E%3Cpath d='M0,10 C30,0 70,0 100,10' stroke='%23557153' fill='none' stroke-width='0.5'/%3E%3Cpath d='M0,10 C30,20 70,20 100,10' stroke='%23557153' fill='none' stroke-width='0.5'/%3E%3C/svg%3E");
+            background-repeat: repeat-x;
+            background-size: 100px;
+            opacity: 0.5;
+            margin: 2rem 0;
+        }
+ 
         h2 {
             color: #2c1810;
             margin-bottom: 2rem;
@@ -247,7 +328,7 @@
         <div class="nav-links">
             <a href="#home">Home</a>
             <a href="#about">About</a>
-            <a href="#women">Women</a>
+            <a href="women.html">Women</a>
             <a href="#self-assessment">Self Assessment</a>
             <a href="appointment.html">Appointment</a>
             <a href="#community">Community</a>
@@ -314,6 +395,38 @@
                 </div>
             </div>
         </section>
+        <footer class="footer-ayurveda pt-5">
+            
+    
+                <div class="herb-divider"></div>
+    
+                <div class="row">
+                    <div class="col-md-6 mb-4">
+                        <h5 class="footer-heading">Contact Us</h5>
+                        <p class="text-muted">
+                            📍 123 Wellness Street, Harmony Gardens<br>
+                            📞 +1 (555) 123-4567<br>
+                            📧 info@ayurvedawellness.com
+                        </p>
+                    </div>
+                    <div class="col-md-6 mb-4">
+                        <h5 class="footer-heading">Connect With Us</h5>
+                        <div>
+                            <a href="#" class="dosha-icon">🌿</a>
+                            <a href="#" class="dosha-icon">🌺</a>
+                            <a href="#" class="dosha-icon">🍃</a>
+                            <a href="#" class="dosha-icon">⭐</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    
+            <div class="footer-bottom text-center">
+                <div class="container">
+                    <p class="text-muted mb-0">© 2025 Ayurveda Wellness. All rights reserved. | Terms & Privacy</p>
+                </div>
+            </div>
+        </footer>
     </main>
 
     <script>
