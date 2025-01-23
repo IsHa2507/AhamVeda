@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Ayurvedic Healing Center</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f9f0;
+            color: #2c5e2e;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+        .navbar {
+            background-color: #1a7431;
+            color: white;
+            padding: 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .nav-links {
+            display: flex;
+            gap: 20px;
+        }
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+        }
+        .main-content {
+            flex: 1;
+            max-width: 900px;
+            margin: 30px auto;
+            background-color: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        .header {
+            text-align: center;
+            color: #1a7431;
+            margin-bottom: 30px;
+        }
+        .booking-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+        }
+        .doctor-list, .booking-section {
+            background-color: #e6f3e6;
+            padding: 20px;
+            border-radius: 8px;
+        }
+        .doctor-card {
+            background-color: white;
+            border: 1px solid #a0d6a0;
+            padding: 15px;
+            margin-bottom: 15px;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        .doctor-card:hover {
+            background-color: #d0f0d0;
+        }
+        .day-selector {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+        }
+        .day-button {
+            padding: 10px;
+            background-color: #4caf50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        .day-button:hover {
+            background-color: #45a049;
+        }
+        .confirm-btn {
+            width: 100%;
+            padding: 12px;
+            background-color: #2e7d32;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            margin-top: 20px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        .confirm-btn:hover {
+            background-color: #1b5e20;
+        }
+        .footer {
+            background-color: #1a7431;
+            color: white;
+            text-align: center;
+            padding: 20px;
+            margin-top: 30px;
+        }
+        .footer-content {
+            display: flex;
+            justify-content: space-around;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="logo">Ayurvedic Healing Center</div>
+        <div class="nav-links">
+            <a href="index.html">Home</a>
+        </div>
+    </nav>
+
+    <div class="main-content">
+        <div class="header">
+            <h1>Book Your Ayurvedic Consultation</h1>
+            <p>Holistic Healing for Complete Wellness</p>
+        </div>
+        
+        <div class="booking-grid">
+            <div class="doctor-list">
+                <h2>Choose Your Doctor</h2>
+                <div class="doctor-card">
+                    <h3>Dr. Priya Sharma</h3>
+                    <p>Panchakarma Therapy</p>
+                    <small>15 Years Experience</small>
+                </div>
+                <div class="doctor-card">
+                    <h3>Dr. Rajesh Kumar</h3>
+                    <p>Herbal Medicine</p>
+                    <small>20 Years Experience</small>
+                </div>
+            </div>
+            
+            <div class="booking-section">
+                <h2>Book Appointment</h2>
+                <div class="day-selector">
+                    <button class="day-button">Monday</button>
+                    <button class="day-button">Tuesday</button>
+                    <button class="day-button">Wednesday</button>
+                    <button class="day-button">Thursday</button>
+                    <button class="day-button">Friday</button>
+                    <button class="day-button">Saturday</button>
+                </div>
+                <button class="confirm-btn">Confirm Appointment</button>
+            </div>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <div class="footer-content">
+            <div>
+                <h4>Contact Us</h4>
+                <p>+91 9876 543210</p>
+                <p>info@ayurvedichealing.com</p>
+            </div>
+            <div>
+                <h4>Address</h4>
+                <p>123 Wellness Street</p>
+                <p>Green City, Nature State</p>
+            </div>
+            <div>
+                <h4>Quick Links</h4>
+                <p>Privacy Policy</p>
+                <p>Terms of Service</p>
+            </div>
+        </div>
+        <div class="copyright">
+            © 2024 Ayurvedic Healing Center. All Rights Reserved.
+        </div>
+    </footer>
+</body>
+</html>
