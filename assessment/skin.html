@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Ayurvedic Skincare Consultation</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f4f0;
+            margin: 0;
+            padding: 20px;
+            color: #2c5e2e;
+        }
+        .survey-container {
+            max-width: 700px;
+            margin: 0 auto;
+            background-color: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        .survey-header {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .survey-header img {
+            max-width: 200px;
+            margin-bottom: 15px;
+        }
+        .question {
+            margin-bottom: 20px;
+        }
+        .question label {
+            display: block;
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
+        .question select, 
+        .question input[type="radio"] {
+            margin-right: 10px;
+        }
+        .submit-btn {
+            background-color: #4caf50;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            width: 100%;
+            margin-top: 20px;
+        }
+        #recommendations {
+            margin-top: 20px;
+            background-color: #e6f3e6;
+            padding: 20px;
+            border-radius: 8px;
+            display: none;
+        }
+        .recommendation-image {
+            max-width: 100px;
+            margin: 10px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="survey-container">
+        <div class="survey-header">
+            <img src="/assesst/ahamveda.webp" alt="Ayurvedic Healing Logo">
+            <h1>Ayurvedic Skincare Consultation</h1>
+            <p>Discover Your Skin's Unique Needs</p>
+        </div>
+
+        <form id="skincare-survey">
+            <div class="question">
+                <label>What is your primary skin type?</label>
+                <select name="skinType" title="Primary Skin Type" required>
+                    <option value="">Select Skin Type</option>
+                    <option value="vata">Dry and Rough (Vata)</option>
+                    <option value="pitta">Sensitive and Prone to Inflammation (Pitta)</option>
+                    <option value="kapha">Oily and Congested (Kapha)</option>
+                </select>
+            </div>
+
+            <div class="question">
+                <label>How does your skin react to stress?</label>
+                <select name="stressReaction" title="Skin Reaction to Stress" required>
+                    <option value="">Select Reaction</option>
+                    <option value="breakouts">Breakouts and Acne</option>
+                    <option value="dryness">Increased Dryness</option>
+                    <option value="redness">Redness and Sensitivity</option>
+                </select>
+            </div>
+
+            <div class="question">
+                <label>Do you experience any of the following?</label>
+                <div>
+                    <input type="checkbox" name="skinIssues" value="dryPatches" id="dryPatches">
+                    <label for="dryPatches">Dry Patches</label>
+                    <input type="checkbox" name="skinIssues" value="oiliness" id="oiliness">
+                    <label for="oiliness">Excessive Oiliness</label>
+                    <input type="checkbox" name="skinIssues" value="pigmentation" id="pigmentation" title="Pigmentation">
+                    <label for="pigmentation">Pigmentation</label>
+                </div>
+            </div>
+
+            <div class="question">
+                <label>Your typical diet consists of:</label>
+                <select name="diet" title="Typical Diet" required>
+                    <option value="">Select Diet Type</option>
+                    <option value="spicy">Spicy and Oily Foods</option>
+                    <option value="cold">Cold and Processed Foods</option>
+                    <option value="balanced">Balanced and Fresh Foods</option>
+                </select>
+            </div>
+
+            <div class="question">
+                <label>How much water do you drink daily?</label>
+                <select name="hydration" title="Daily Water Intake" required>
+                    <option value="">Select Water Intake</option>
+                    <option value="low">Less than 1 Liter</option>
+                    <option value="medium">1-2 Liters</option>
+                    <option value="high">More than 2 Liters</option>
+                </select>
+            </div>
+
+            <button type="submit" class="submit-btn">Get Personalized Recommendations</button>
+        </form>
+
+        <div id="recommendations">
+            <h2>Your Personalized Ayurvedic Skincare Plan</h2>
+            <div id="recomm-content"></div>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('skincare-survey').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const formData = new FormData(e.target);
+            const data = Object.fromEntries(formData.entries());
+            const recommendationsDiv = document.getElementById('recommendations');
+            const recommContent = document.getElementById('recomm-content');
+
+            let recommendations = `
+                <h3>Recommended Yoga Practices</h3>
+                <img src="/assesst/yoga.webp" alt="Yoga Pose" class="recommendation-image">
+                <ul>
+                    <li>Morning Sun Salutations (Surya Namaskar)</li>
+                    <li>Breathing Exercises (Pranayama)</li>
+                    <li>Stress Reduction Poses</li>
+                </ul>
+
+                <h3>Recommended Ayurvedic Products</h3>
+                <img src="/assesst/ayurved.png" alt="Ayurvedic Products" class="recommendation-image">
+                <ul>
+                    <li>Herbal Face Wash with Neem and Turmeric</li>
+                    <li>Coconut Oil for Moisturization</li>
+                    <li>Aloe Vera Gel</li>
+                </ul>
+            `;
+
+            recommContent.innerHTML = recommendations;
+            recommendationsDiv.style.display = 'block';
+        });
+    </script>
+</body>
+</html>
