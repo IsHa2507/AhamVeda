@@ -1,6 +1,6 @@
-
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,24 +8,23 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/css/bootstrap.min.css" rel="stylesheet">
     <style>
-    
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
-        
+
 
         html {
             scroll-behavior: smooth;
         }
-        
+
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             overflow-x: hidden;
             background: #f0ebe1;
         }
-        
+
         #canvas-container {
             position: fixed;
             top: 0;
@@ -34,7 +33,7 @@
             height: 100vh;
             z-index: -1;
         }
-        
+
         nav {
             position: fixed;
             top: 0;
@@ -45,130 +44,140 @@
             backdrop-filter: blur(10px);
             z-index: 100;
         }
-        
+
         .nav-links {
             display: flex;
             justify-content: center;
             gap: 2rem;
         }
-        
+
         .nav-links a {
             color: #2c1810;
             text-decoration: none;
             font-weight: 500;
             transition: color 0.3s;
         }
-        
+
         .nav-links a:hover {
             color: #8b4513;
         }
-        
+
         .content {
             position: relative;
             padding: 2rem;
             margin-top: 100vh;
             background: #fff;
         }
-        
-            .about-container {
-                display: flex;
-                align-items: center;
-                justify-content: space-between;
-                gap: 2rem;
-            }
-        
-            .text-content {
-                flex: 1;
-                color: #2c1810;
-            }
-        
-            .image-content {
-                flex: 0.5;
-                display: flex;
-                justify-content: center;
-            }
-        
-            .image-content img {
-                max-width: 100%;
-                border-radius: 10px;
-                box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-            }
-            
-            .column {
-                margin: 15px 15px 0;
-                padding: 0;
-            }
-            .column:last-child {
-                padding-bottom: 60px;
-            }
-            .column::after {
-                content: '';
-                clear: both;
-                display: block;
-            }
-            .column div {
-                position: relative;
-                float: left;
-                width: 300px;
-                height: 200px;
-                margin: 0 0 0 25px;
-                padding: 0;
-            }
-            .column div:first-child {
-                margin-left: 0;
-            }
-            .column div span {
-                position: absolute;
-                bottom: -20px;
-                left: 0;
-                z-index: -1;
-                display: block;
-                width: 300px;
-                margin: 0;
-                padding: 0;
-                color: #444;
-                font-size: 18px;
-                text-decoration: none;
-                text-align: center;
-                -webkit-transition: .3s ease-in-out;
-                transition: .3s ease-in-out;
-                opacity: 0;
-            }
-            figure {
-                width: 300px;
-                height: 300px;
-                margin: 0;
-                padding: 0;
-                background: #fff;
-                overflow: hidden;
-            }
-            figure:hover+span {
-                bottom: -36px;
-                opacity: 1;
-            }
-            .hover01 figure img {
-                -webkit-transform: scale(1);
-                transform: scale(1);
-                -webkit-transition: .3s ease-in-out;
-                transition: .3s ease-in-out;
-                
-            }
-            .hover01 figure:hover img {
-                -webkit-transform: scale(1.3);
-                transform: scale(1.3);
-            }
-            .section {
-                opacity: 0;
-                transform: translateY(50px);
-                transition: all 1s ease;
-            }
-            
-            .section.visible {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        
-        
+
+        .about-container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 2rem;
+        }
+
+        .text-content {
+            flex: 1;
+            color: #2c1810;
+        }
+
+        .image-content {
+            flex: 0.5;
+            display: flex;
+            justify-content: center;
+        }
+
+        .image-content img {
+            max-width: 100%;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .column {
+            margin: 15px 15px 0;
+            padding: 0;
+        }
+
+        .column:last-child {
+            padding-bottom: 60px;
+        }
+
+        .column::after {
+            content: '';
+            clear: both;
+            display: block;
+        }
+
+        .column div {
+            position: relative;
+            float: left;
+            width: 300px;
+            height: 200px;
+            margin: 0 0 0 25px;
+            padding: 0;
+        }
+
+        .column div:first-child {
+            margin-left: 0;
+        }
+
+        .column div span {
+            position: absolute;
+            bottom: -20px;
+            left: 0;
+            z-index: -1;
+            display: block;
+            width: 300px;
+            margin: 0;
+            padding: 0;
+            color: #444;
+            font-size: 18px;
+            text-decoration: none;
+            text-align: center;
+            -webkit-transition: .3s ease-in-out;
+            transition: .3s ease-in-out;
+            opacity: 0;
+        }
+
+        figure {
+            width: 300px;
+            height: 300px;
+            margin: 0;
+            padding: 0;
+            background: #fff;
+            overflow: hidden;
+        }
+
+        figure:hover+span {
+            bottom: -36px;
+            opacity: 1;
+        }
+
+        .hover01 figure img {
+            -webkit-transform: scale(1);
+            transform: scale(1);
+            -webkit-transition: .3s ease-in-out;
+            transition: .3s ease-in-out;
+
+        }
+
+        .hover01 figure:hover img {
+            -webkit-transform: scale(1.3);
+            transform: scale(1.3);
+        }
+
+        .section {
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all 1s ease;
+        }
+
+        .section.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+
         .section {
             max-width: 1200px;
             margin: 0 auto;
@@ -177,12 +186,12 @@
             transform: translateY(50px);
             transition: all 1s ease;
         }
-        
+
         .section.visible {
             opacity: 1;
             transform: translateY(0);
         }
-        
+
         .hero {
             height: 100vh;
             display: flex;
@@ -195,41 +204,42 @@
             width: 100%;
             padding: 2rem;
         }
-        
+
         .hero h1 {
             font-size: 4rem;
             margin-bottom: 1rem;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
         }
-        
+
         .herb-card {
             background: white;
             padding: 2rem;
             border-radius: 15px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
             margin: 2rem 0;
             cursor: pointer;
             transition: transform 0.3s;
         }
-        
+
         .herb-card:hover {
             transform: translateY(-10px);
         }
-        
+
         .doshas {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 2rem;
             margin: 2rem 0;
         }
-        
+
         .dosha-card {
             background: #fff;
             padding: 2rem;
             border-radius: 15px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
             text-align: center;
         }
+
         .footer-ayurveda {
             background: linear-gradient(to bottom, var(--soft-cream), #fff);
             position: relative;
@@ -243,14 +253,14 @@
             left: 0;
             right: 0;
             height: 3px;
-            background: linear-gradient(90deg, 
-                var(--primary-green),
-                var(--light-green),
-                var(--earth-brown),
-                var(--light-green),
-                var(--primary-green)
-            );
+            background: linear-gradient(90deg,
+                    var(--primary-green),
+                    var(--light-green),
+                    var(--earth-brown),
+                    var(--light-green),
+                    var(--primary-green));
         }
+
         .footer-heading {
             color: var(--primary-green);
             font-size: 1.5rem;
@@ -271,7 +281,7 @@
             color: var(--primary-green);
             transform: translateX(5px);
         }
-        
+
         .newsletter-input {
             background: rgba(255, 255, 255, 0.9);
             border: 1px solid var(--light-green);
@@ -307,13 +317,13 @@
             opacity: 0.5;
             margin: 2rem 0;
         }
- 
+
         h2 {
             color: #2c1810;
             margin-bottom: 2rem;
             font-size: 2.5rem;
         }
-        
+
         p {
             color: #666;
             line-height: 1.6;
@@ -321,9 +331,10 @@
         }
     </style>
 </head>
+
 <body>
     <div id="canvas-container"></div>
-    
+
     <nav>
         <div class="nav-links">
             <a href="#home">Home</a>
@@ -331,7 +342,7 @@
             <a href="women.html">Women</a>
             <a href="assessment.html">Self Assessment</a>
             <a href="appointment.html">Appointment</a>
-            <a href="#community">Community</a>
+            <a href="community.html">Community</a>
         </div>
     </nav>
 
@@ -349,11 +360,14 @@
                     <h2>ABOUT US</h2>
                     <p>Welcome to AhamVeda – Where Tradition Meets Innovation</p>
                     <p>
-                        At AhamVeda, we believe in the power of Ayurveda—the ancient Indian science of life and well-being. Rooted in time-tested traditions, AhamVeda offers holistic solutions that cater to modern needs, ensuring the purest form of Ayurvedic care.
+                        At AhamVeda, we believe in the power of Ayurveda—the ancient Indian science of life and
+                        well-being. Rooted in time-tested traditions, AhamVeda offers holistic solutions that cater to
+                        modern needs, ensuring the purest form of Ayurvedic care.
                     </p>
                     <p>
                         <b>Our Mission</b><br>
-                        To harmonize the essence of traditional Ayurvedic medicine with the evolving lifestyles of today, empowering individuals to lead balanced, healthier lives.
+                        To harmonize the essence of traditional Ayurvedic medicine with the evolving lifestyles of
+                        today, empowering individuals to lead balanced, healthier lives.
                     </p>
                 </div>
                 <div class="image-content">
@@ -370,11 +384,13 @@
             <h2>Sacred Herbs</h2>
             <div class="herb-card">
                 <h3>Ashwagandha</h3>
-                <p>Known as "Indian Winter Cherry," this adaptogenic herb helps reduce stress and anxiety while boosting brain function.</p>
+                <p>Known as "Indian Winter Cherry," this adaptogenic herb helps reduce stress and anxiety while boosting
+                    brain function.</p>
             </div>
             <div class="herb-card">
                 <h3>Turmeric</h3>
-                <p>A powerful anti-inflammatory herb that has been used for thousands of years in Ayurvedic medicine.</p>
+                <p>A powerful anti-inflammatory herb that has been used for thousands of years in Ayurvedic medicine.
+                </p>
             </div>
         </section>
 
@@ -396,31 +412,31 @@
             </div>
         </section>
         <footer class="footer-ayurveda pt-5">
-            
-    
-                <div class="herb-divider"></div>
-    
-                <div class="row">
-                    <div class="col-md-6 mb-4">
-                        <h5 class="footer-heading">Contact Us</h5>
-                        <p class="text-muted">
-                            📍 123 Wellness Street, Harmony Gardens<br>
-                            📞 +1 (555) 123-4567<br>
-                            📧 info@ayurvedawellness.com
-                        </p>
-                    </div>
-                    <div class="col-md-6 mb-4">
-                        <h5 class="footer-heading">Connect With Us</h5>
-                        <div>
-                            <a href="#" class="dosha-icon">🌿</a>
-                            <a href="#" class="dosha-icon">🌺</a>
-                            <a href="#" class="dosha-icon">🍃</a>
-                            <a href="#" class="dosha-icon">⭐</a>
-                        </div>
+
+
+            <div class="herb-divider"></div>
+
+            <div class="row">
+                <div class="col-md-6 mb-4">
+                    <h5 class="footer-heading">Contact Us</h5>
+                    <p class="text-muted">
+                        📍 123 Wellness Street, Harmony Gardens<br>
+                        📞 +1 (555) 123-4567<br>
+                        📧 info@ayurvedawellness.com
+                    </p>
+                </div>
+                <div class="col-md-6 mb-4">
+                    <h5 class="footer-heading">Connect With Us</h5>
+                    <div>
+                        <a href="#" class="dosha-icon">🌿</a>
+                        <a href="#" class="dosha-icon">🌺</a>
+                        <a href="#" class="dosha-icon">🍃</a>
+                        <a href="#" class="dosha-icon">⭐</a>
                     </div>
                 </div>
             </div>
-    
+            </div>
+
             <div class="footer-bottom text-center">
                 <div class="container">
                     <p class="text-muted mb-0">© 2025 Ayurveda Wellness. All rights reserved. | Terms & Privacy</p>
@@ -473,22 +489,22 @@
         }
 
         // Scroll animations
-       const sections = document.querySelectorAll('.section');
-const observerOptions = {
-    threshold: 0.1
-};
+        const sections = document.querySelectorAll('.section');
+        const observerOptions = {
+            threshold: 0.1
+        };
 
-const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-        if (entry.isIntersecting) {
-            entry.target.classList.add('visible');
-        }
-    });
-}, observerOptions);
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
 
-sections.forEach(section => {
-    observer.observe(section);
-});
+        sections.forEach(section => {
+            observer.observe(section);
+        });
 
         // Responsive canvas
         window.addEventListener('resize', () => {
@@ -506,4 +522,5 @@ sections.forEach(section => {
         animate();
     </script>
 </body>
+
 </html>

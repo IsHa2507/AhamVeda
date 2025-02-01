@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Community Connect</title>
+    <style>
+        /* General Styling */
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #eef1f5;
+            margin: 0;
+            padding: 0;
+        }
+
+        /* Navbar */
+
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            padding: 1.5rem;
+            background: rgba(255, 255, 255, 0.1);
+            -webkit-backdrop-filter: blur(10px);
+            backdrop-filter: blur(10px);
+            z-index: 100;
+        }
+
+        .nav-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            color: #2c1810;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: #8b4513;
+        }
+
+        /* Stories Section */
+        .stories-container {
+            display: flex;
+            gap: 15px;
+            overflow-x: auto;
+            padding: 20px;
+            background: white;
+            border-radius: 12px;
+            margin: 20px auto;
+            margin-top: 70px;
+            width: 90%;
+            max-width: 900px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .story {
+            width: 90px;
+            height: 90px;
+            border-radius: 50%;
+            border: 3px solid #79482c;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            cursor: pointer;
+            transition: transform 0.2s ease-in-out;
+        }
+
+        .story img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 50%;
+        }
+
+        .story:hover {
+            transform: scale(1.1);
+        }
+
+        /* Community Container */
+        .community-container {
+            width: 80%;
+            max-width: 900px;
+            background-color: white;
+            margin: 10px auto;
+            border-radius: 12px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+        }
+
+        /* Post Styling */
+        .post {
+            background-color: #fff;
+            border-radius: 10px;
+            padding: 15px;
+            margin-bottom: 15px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            transition: transform 0.2s ease-in-out;
+        }
+
+        .post:hover {
+            transform: translateY(-3px);
+        }
+
+        .post-header {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 10px;
+        }
+
+        .avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background-color: #7a3b41;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 22px;
+            color: white;
+            font-weight: bold;
+        }
+
+        .post-content {
+            color: #333;
+            margin-bottom: 10px;
+            line-height: 1.6;
+        }
+
+        .post-image {
+            width: 50%;
+            height: 300px;
+            object-fit: cover;
+            border-radius: 8px;
+            margin-bottom: 10px;
+        }
+
+        .interaction-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .like-btn {
+            background-color: #2c1810;
+            color: white;
+            border: none;
+            padding: 8px 14px;
+            border-radius: 20px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            font-size: 14px;
+            transition: background 0.3s, transform 0.1s;
+        }
+
+        .like-btn:hover {
+            background-color: #c0392b;
+        }
+
+        .like-btn:active {
+            transform: scale(0.95);
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Navbar -->
+    <nav>
+        <div class="nav-links">
+            <a href="#home">Home</a>
+            <a href="#about">About</a>
+            <a href="women.html">Women</a>
+            <a href="assessment.html">Self Assessment</a>
+            <a href="appointment.html">Appointment</a>
+            <a href="community.html">Community</a>
+        </div>
+    </nav>
+
+    <!-- Stories Section -->
+    <div class="stories-container" id="storiesContainer">
+        <!-- Stories will be dynamically added here -->
+    </div>
+
+    <!-- Posts Container -->
+    <div class="community-container" id="postContainer">
+        <!-- Posts will be dynamically added here -->
+    </div>
+
+    <script>
+        const users = [
+            { username: "TechNinja", imageUrl: "avatar1.png" },
+            { username: "DesignPro", imageUrl: "avatar2.png" },
+            { username: "ArtistSpirit", imageUrl: "avtar3.png" },
+            { username: "TechNinja", imageUrl: "avatar1.png" },
+            { username: "DesignPro", imageUrl: "avatar5.png" },
+            { username: "ArtistSpirit", imageUrl: "avatar4.png" }
+        ];
+
+        const posts = [
+            { username: "Riya", content: "Guyz! Check out this new ayurvedic book!", imageUrl: "Book.png", likes: 42 },
+            { username: "Sneha", content: "Try my new Recipe for better skin!", imageUrl: "recipe.png", likes: 67 },
+            { username: "Akhil", content: "Check Out these Ayurvedic Product!", imageUrl: "image.png", likes: 89 }
+        ];
+
+        function createStoryElement(user) {
+            const storyElement = document.createElement('div');
+            storyElement.classList.add('story');
+            storyElement.innerHTML = `<img src="${user.imageUrl}" alt="Story">`;
+            return storyElement;
+        }
+
+        function createPostElement(post) {
+            const postElement = document.createElement('div');
+            postElement.classList.add('post');
+
+            postElement.innerHTML = `
+                <div class="post-header">
+                    <div class="avatar">${post.username[0]}</div>
+                    <h3>${post.username}</h3>
+                </div>
+                <p class="post-content">${post.content}</p>
+                <img src="${post.imageUrl}" class="post-image" alt="Post Image">
+                <div class="interaction-bar">
+                    <button class="like-btn">❤️ <span class="like-count">${post.likes}</span></button>
+                </div>
+            `;
+
+            return postElement;
+        }
+
+        function renderStories() {
+            const container = document.getElementById('storiesContainer');
+            users.forEach(user => container.appendChild(createStoryElement(user)));
+        }
+
+        function renderPosts() {
+            const container = document.getElementById('postContainer');
+            posts.forEach(post => container.appendChild(createPostElement(post)));
+        }
+
+        document.addEventListener("DOMContentLoaded", () => {
+            renderStories();
+            renderPosts();
+        });
+    </script>
+
+</body>
+
+</html>
