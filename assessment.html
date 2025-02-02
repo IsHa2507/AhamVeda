@@ -10,10 +10,10 @@
             background-color: #f0ebe1;
             margin: 0;
             padding: 20px;
-            color:  #8b4513;
+            color: #b77b50;
         }
         .navbar {
-            background-color:  #8b4513;
+            background-color: #b77b50;
             color: white;
             padding: 15px;
             display: flex;
@@ -35,7 +35,7 @@
         .header {
             text-align: center;
             margin-bottom: 30px;
-            color:  #7d3e11;
+            color: #b77b50;
         }
         .assessment-grid {
             display: grid;
@@ -55,11 +55,11 @@
         }
         .card-icon {
             font-size: 3rem;
-            color:  #8b4513;
+            color: #b77b50;
             margin-bottom: 15px;
         }
         .assessment-btn {
-            background-color:  #8b4513;
+            background-color: #b77b50;
             color: white;
             border: none;
             padding: 10px 15px;
@@ -69,10 +69,10 @@
             transition: background-color 0.3s ease;
         }
         .assessment-btn:hover {
-            background-color:  #8b4513;
+            background-color: #a56a40;
         }
         .footer {
-            background-color: #8b4513;
+            background-color: #b77b50;
             color: white;
             text-align: center;
             padding: 20px;
@@ -81,6 +81,40 @@
         .footer-content {
             display: flex;
             justify-content: space-around;
+        }
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0,0,0,0.5);
+        }
+        .modal-content {
+            background-color: white;
+            margin: 10% auto;
+            padding: 20px;
+            border-radius: 10px;
+            width: 80%;
+            max-width: 500px;
+            animation: slideIn 0.5s ease;
+        }
+        @keyframes slideIn {
+            from { transform: translateY(-50px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+        .close {
+            color: #b77b50;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        .close:hover {
+            color: #a56a40;
         }
     </style>
 </head>
@@ -102,35 +136,49 @@
                 <div class="card-icon">🌿</div>
                 <h3>Skin Assessment</h3>
                 <p>Understand your skin type and dosha balance</p>
-                <button class="assessment-btn" onclick="location.href='assessment/skin.html'">Start Assessment</button>
+                <button class="assessment-btn" onclick="startAssessment('skin')">Start Assessment</button>
             </div>
             
             <div class="assessment-card">
                 <div class="card-icon">💆</div>
                 <h3>Hair Health</h3>
                 <p>Evaluate your hair's condition and nutritional needs</p>
-                <button class="assessment-btn">Start Assessment</button>
+                <button class="assessment-btn" onclick="startAssessment('hair')">Start Assessment</button>
             </div>
             
             <div class="assessment-card">
                 <div class="card-icon">👁️</div>
                 <h3>Eye Health</h3>
                 <p>Check your eye health and potential imbalances</p>
-                <button class="assessment-btn" >Start Assessment</button>
+                <button class="assessment-btn" onclick="startAssessment('eye')">Start Assessment</button>
             </div>
             
             <div class="assessment-card">
                 <div class="card-icon">🧘</div>
                 <h3>Mental Wellness</h3>
                 <p>Assess your mental state and stress levels</p>
-                <button class="assessment-btn">Start Assessment</button>
+                <button class="assessment-btn" onclick="startAssessment('mental')">Start Assessment</button>
             </div>
             
             <div class="assessment-card">
                 <div class="card-icon">🍽️</div>
                 <h3>Digestive Health</h3>
                 <p>Understand your digestive system and metabolism</p>
-                <button class="assessment-btn">Start Assessment</button>
+                <button class="assessment-btn" onclick="startAssessment('digestive')">Start Assessment</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="assessmentModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal()">&times;</span>
+            <h2 id="modalTitle">Assessment</h2>
+            <div id="modalContent">
+                <p>Please answer the following questions:</p>
+                <form id="assessmentForm">
+                    <div id="questions"></div>
+                    <button type="submit" class="assessment-btn">Submit</button>
+                </form>
             </div>
         </div>
     </div>
@@ -158,5 +206,89 @@
         </div>
     </footer>
 
+    <script>
+        const modal = document.getElementById('assessmentModal');
+        const modalTitle = document.getElementById('modalTitle');
+        const questionsDiv = document.getElementById('questions');
+        const assessmentForm = document.getElementById('assessmentForm');
+
+        function startAssessment(type) {
+            modalTitle.textContent = `${type.charAt(0).toUpperCase() + type.slice(1)} Assessment`;
+            questionsDiv.innerHTML = '';
+            const questions = getQuestions(type);
+            questions.forEach((question, index) => {
+                const questionDiv = document.createElement('div');
+                questionDiv.innerHTML = `
+                    <label>${question}</label>
+                    <select id="q${index}">
+                        <option value="1">1 - Rarely</option>
+                        <option value="2">2 - Occasionally</option>
+                        <option value="3">3 - Sometimes</option>
+                        <option value="4">4 - Often</option>
+                        <option value="5">5 - Always</option>
+                    </select>
+                `;
+                questionsDiv.appendChild(questionDiv);
+            });
+            modal.style.display = 'block';
+        }
+
+        function closeModal() {
+            modal.style.display = 'none';
+        }
+
+        function getQuestions(type) {
+            const questions = {
+                skin: [
+                    "How often do you experience dry skin?",
+                    "How often do you experience oily skin?",
+                    "How often do you experience acne or breakouts?"
+                ],
+                hair: [
+                    "How often do you experience hair fall?",
+                    "How often do you experience dry scalp?",
+                    "How often do you experience dandruff?"
+                ],
+                eye: [
+                    "How often do you experience dry eyes?",
+                    "How often do you experience eye strain?",
+                    "How often do you experience blurred vision?"
+                ],
+                mental: [
+                    "How often do you feel stressed?",
+                    "How often do you feel anxious?",
+                    "How often do you feel depressed?"
+                ],
+                digestive: [
+                    "How often do you experience bloating?",
+                    "How often do you experience constipation?",
+                    "How often do you experience indigestion?"
+                ]
+            };
+            return questions[type] || [];
+        }
+
+        assessmentForm.addEventListener('submit', function(event) {
+            event.preventDefault();
+            const answers = [];
+            for (let i = 0; i < questionsDiv.children.length; i++) {
+                const select = document.getElementById(`q${i}`);
+                answers.push(parseInt(select.value));
+            }
+            const averageScore = answers.reduce((a, b) => a + b, 0) / answers.length;
+            const recommendation = getRecommendation(averageScore);
+            questionsDiv.innerHTML = `<p>${recommendation}</p>`;
+        });
+
+        function getRecommendation(score) {
+            if (score <= 2) {
+                return "Your assessment indicates a low risk. Maintain your current lifestyle and consider regular check-ups.";
+            } else if (score <= 4) {
+                return "Your assessment indicates a moderate risk. Consider making some lifestyle changes and consult a specialist if necessary.";
+            } else {
+                return "Your assessment indicates a high risk. Please consult a specialist for further evaluation and treatment.";
+            }
+        }
+    </script>
 </body>
 </html>
