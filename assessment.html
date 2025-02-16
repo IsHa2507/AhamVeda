@@ -207,6 +207,32 @@
     </footer>
 
     <script>
+
+function calculateDosha(answers) {
+    let vata = 0, pitta = 0, kapha = 0;
+    
+    // Question weights for each dosha
+    answers.forEach((answer, index) => {
+        switch(index) {
+            case 0: case 4: case 6:
+                vata += answer;
+                break;
+            case 2: case 5: case 8:
+                pitta += answer;
+                break;
+            case 1: case 3: case 7:
+                kapha += answer;
+                break;
+        }
+    });
+    
+    const total = vata + pitta + kapha;
+    return {
+        vata: (vata / total) * 100,
+        pitta: (pitta / total) * 100,
+        kapha: (kapha / total) * 100
+    };
+}
         const modal = document.getElementById('assessmentModal');
         const modalTitle = document.getElementById('modalTitle');
         const questionsDiv = document.getElementById('questions');
@@ -240,9 +266,16 @@
         function getQuestions(type) {
             const questions = {
                 skin: [
-                    "How often do you experience dry skin?",
-                    "How often do you experience oily skin?",
-                    "How often do you experience acne or breakouts?"
+                "Does your skin tend to be dry, rough, or flaky?",
+            "Does your skin get oily or shiny, especially in T-zone?",
+            "Is your skin sensitive to heat or prone to inflammation?",
+            "Do you notice that your skin tone is uneven or shows dark spots?",
+            "Does your skin feel thin and cool to touch?",
+            "Do you experience frequent acne or pimples?",
+            "Does your skin show premature wrinkles or aging signs?",
+            "Does your skin feel well-balanced with good texture?",
+            "Do you experience redness or rashes easily?",
+            "Does your skin get affected by seasonal changes?"
                 ],
                 hair: [
                     "How often do you experience hair fall?",
@@ -269,26 +302,77 @@
         }
 
         assessmentForm.addEventListener('submit', function(event) {
-            event.preventDefault();
-            const answers = [];
-            for (let i = 0; i < questionsDiv.children.length; i++) {
-                const select = document.getElementById(`q${i}`);
-                answers.push(parseInt(select.value));
-            }
-            const averageScore = answers.reduce((a, b) => a + b, 0) / answers.length;
-            const recommendation = getRecommendation(averageScore);
-            questionsDiv.innerHTML = `<p>${recommendation}</p>`;
-        });
+    event.preventDefault();
+    const answers = [];
+    for (let i = 0; i < questionsDiv.children.length; i++) {
+        const select = document.getElementById(`q${i}`);
+        answers.push(parseInt(select.value));
+    }
+    const recommendation = getRecommendation(answers);
+    questionsDiv.innerHTML = recommendation;
+});
 
-        function getRecommendation(score) {
-            if (score <= 2) {
-                return "Your assessment indicates a low risk. Maintain your current lifestyle and consider regular check-ups.";
-            } else if (score <= 4) {
-                return "Your assessment indicates a moderate risk. Consider making some lifestyle changes and consult a specialist if necessary.";
-            } else {
-                return "Your assessment indicates a high risk. Please consult a specialist for further evaluation and treatment.";
-            }
+        function getRecommendation(answers) {
+    const doshas = calculateDosha(answers);
+    let dominantDosha = Object.entries(doshas).reduce((a, b) => a[1] > b[1] ? a : b)[0];
+    
+    const recommendations = {
+        vata: {
+            constitution: "Your skin shows Vata dominance (Air & Space)",
+            characteristics: "Your skin tends to be dry, thin, and prone to premature aging.",
+            recommendations: [
+                "Use warm, nourishing oils like sesame or almond oil for daily massage",
+                "Stay hydrated and maintain a regular skincare routine",
+                "Protect your skin from dry, cold weather",
+                "Include healthy fats in your diet"
+            ]
+        },
+        pitta: {
+            constitution: "Your skin shows Pitta dominance (Fire & Water)",
+            characteristics: "Your skin is sensitive, prone to inflammation and redness.",
+            recommendations: [
+                "Use cooling oils like coconut or sunflower oil",
+                "Avoid excessive sun exposure and hot environments",
+                "Include cooling foods in your diet",
+                "Use natural, gentle skincare products"
+            ]
+        },
+        kapha: {
+            constitution: "Your skin shows Kapha dominance (Earth & Water)",
+            characteristics: "Your skin tends to be oily, thick, and prone to congestion.",
+            recommendations: [
+                "Use stimulating, lightweight oils like jojoba or grapeseed",
+                "Maintain an active lifestyle to improve circulation",
+                "Use warm, stimulating herbs in your skincare",
+                "Follow a diet that reduces excess oil production"
+            ]
         }
+    };
+
+    const result = recommendations[dominantDosha];
+    
+    // Add disclaimer
+    const disclaimer = `
+        <div style="margin-top: 20px; padding: 15px; background-color: #f8f8f8; border-left: 4px solid #b77b50;">
+            <strong>Medical Disclaimer:</strong><br>
+            This assessment is for educational purposes only and is not intended to replace professional medical advice. 
+            The recommendations provided are based on traditional Ayurvedic principles. Please consult with a qualified 
+            healthcare provider or Ayurvedic practitioner before starting any new skincare routine or treatment.
+        </div>
+    `;
+
+    return `
+        <div>
+            <h3>${result.constitution}</h3>
+            <p><strong>Characteristics:</strong> ${result.characteristics}</p>
+            <h4>Recommended Ayurvedic Practices:</h4>
+            <ul>
+                ${result.recommendations.map(rec => `<li>${rec}</li>`).join('')}
+            </ul>
+            ${disclaimer}
+        </div>
+    `;
+}
     </script>
 </body>
 </html>
